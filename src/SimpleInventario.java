@@ -11,9 +11,7 @@ public class SimpleInventario {
 
         else {
             System.out.println("No se permite este articulo");
-
         }
-
     }
 
     public static void removerArticulo(int id) {
@@ -22,16 +20,13 @@ public class SimpleInventario {
         }
     }
 
-    public static String obtenerPrecioArticulo(String articulo,double precio) {
-        double random = (Math.random()*5000) + 100;
-
-        if (articulo.startsWith("mar")&& precio >= 0.00) {
-            return "Articulo" + articulo + "tiene un valor de RD$" + random;
-        } else if (articulo.startsWith("tab")|| precio >= 12000.00) {
-            return "Articulo" + articulo + "tiene un valor que sobrepasa los 12,000.00. El monto es de RD$" + random;
-        }else return "ninguno de los ecenarios aplica";
-
-
+    public static double obtenerPrecioArticulo(){
+        double precio = (Math.random()*5000) + 100;
+        if (precio > 0.00){
+            return precio;
+        }else{
+            return -1;
+        }
     }
 
 
@@ -42,7 +37,6 @@ public class SimpleInventario {
         System.out.println("Bienvenid@ " + usuario);
         String articuloExistente = obtenerNombreArticulo();
         System.out.println("articulo existente:" + articuloExistente);
-
     }
 
     public static String obtenerNombreArticulo() {
@@ -53,6 +47,25 @@ public class SimpleInventario {
             return nombre;
         } else {
             return "error de operacion";
+        }
+    }
+
+    public static void modificarArticulo() {
+        String nombre = obtenerNombreArticulo();
+        double precio = obtenerPrecioArticulo();
+        if (nombre.startsWith("A")||nombre.startsWith("D")){
+            obtenerNombreArticulo();
+            if (precio >= 150 && precio <= 250){
+                precio = precio + (precio * 0.02);
+                System.out.println(nombre + precio);
+            } else if (precio > 250 && precio <= 500){
+                precio = precio + (precio * 0.08);
+                System.out.println(nombre + precio);
+            }else{ precio = precio + (precio * 0.012);}
+
+        } else if (nombre.startsWith("C")||nombre.startsWith("M")) {
+            precio = precio - (precio * 0.20);
+            System.out.println(nombre + precio);
         }
     }
 
