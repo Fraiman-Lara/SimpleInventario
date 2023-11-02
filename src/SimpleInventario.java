@@ -2,24 +2,17 @@ import java.util.Scanner;
 
 public class SimpleInventario {
 
-    public static void agregarArticulo(String s) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese su articulo:");
-        String agregarArticulo = scanner.next();
-        if (agregarArticulo.length() > 4)
-            System.out.println("Articulo agregado exitosamente!");
-
-        else {
-            System.out.println("No se permite este articulo");
-        }
+    static String [] articulos = new String[5];
+    public static void agregarArticulo(){
+       for (int indice = 0; indice < articulos.length; indice++){
+           articulos[indice] =  obtenerNombreArticulo();
+       }
     }
-
     public static void removerArticulo(int id) {
         if (id > 0) ;{
             System.out.println("Ejecutado");
         }
     }
-
     public static double obtenerPrecioArticulo(){
         double precio = (Math.random()*5000) + 100;
         if (precio > 0.00){
@@ -28,17 +21,17 @@ public class SimpleInventario {
             return -1;
         }
     }
-
-
     public static void imprimirInventario() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese su nombre:");
         String usuario = scanner.next();
         System.out.println("Bienvenid@ " + usuario);
         String articuloExistente = obtenerNombreArticulo();
-        System.out.println("articulo existente:" + articuloExistente);
+        System.out.println("Articulos registrados: " );
+        for (String articulo: articulos){
+            System.out.println(articulo);
+        }
     }
-
     public static String obtenerNombreArticulo() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese el nombre del articulo");
@@ -49,7 +42,6 @@ public class SimpleInventario {
             return "error de operacion";
         }
     }
-
     public static void modificarArticulo() {
         String nombre = obtenerNombreArticulo();
         double precio = obtenerPrecioArticulo();
@@ -70,8 +62,8 @@ public class SimpleInventario {
     }
 
     public static void main(String[] args) {
-      obtenerNombreArticulo();
+        agregarArticulo();
+        imprimirInventario();
 
     }
-
 }
